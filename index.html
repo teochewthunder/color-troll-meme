@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Color Troll Meme</title>
+
+		<style>
+			.ctmContainer
+			{
+				width: 500px;
+				height: 200px;
+			}
+
+			.ctm
+			{
+				width: 200px;
+				height: 200px;
+				float: left;
+				border-radius: 50%;
+			}
+
+			.ctm h1
+			{
+				margin-top: 10%;
+				font-size: 20px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="ctmApp">
+			<div class="ctmContainer">
+				<div class="ctm">
+					<h1></h1>
+				</div>
+			</div>
+		</div>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
+
+		<script>
+			var app = new Vue
+			(
+				{
+					el: "#ctmApp",
+					data:
+					{
+						ctms: 
+						[
+							{
+								name: "",
+								color: [0, 0, 0]
+							},
+							{
+								name: "",
+								color: [0, 0, 0]
+							},
+							{
+								name: "",
+								color: [0, 0, 0]
+							},
+							{
+								name: "",
+								color: [0, 0, 0]
+							},							
+							{
+								name: "",
+								color: [0, 0, 0]
+							},
+							{
+								name: "",
+								color: [0, 0, 0]
+							},
+							{
+								name: "",
+								color: [0, 0, 0]
+							},
+							{
+								name: "",
+								color: [0, 0, 0]
+							},
+							{
+								name: "",
+								color: [0, 0, 0]
+							}
+						],
+						wordTypes:
+						{	
+							area: 
+							[
+								"eye",
+								"mouth",
+								"tailbone",
+								"wrist",
+								"liver",
+								"kidney",
+								"spleen",
+								"colon",
+								"brain",
+								"knee",
+								"hip"
+							],
+							trollArea: 
+							[
+								"testicle",
+								"anus",
+								"vagina",
+								"nostril",
+								"nipple",
+								"groin",
+								"penis",
+								"labia",
+								"cleavage",
+								"rectum"
+							],
+							condition_prefix: 
+							[
+								"detached",
+								"bruised",
+								"broken",
+								"inflamed"
+							],
+							condition_suffix: 
+							[
+								"tear",
+								"tumor",
+								"cancer",
+								"ulcer",
+								"blister",
+								"dislocation",
+								"fracture"
+							]
+						}
+					},
+					methods:
+					{
+						fillInfo: function(ctmIndex)
+						{
+							var keys = Object.keys(this.wordTypes);
+
+							this.ctms.forEach(
+								(ctm) => 
+								{
+
+								}
+							);														
+						},
+						getColor: function()
+						{
+							var r = this.getRandomNo(255);
+							var b = this.getRandomNo(255);
+							var g = this.getRandomNo(255);
+							return [r, g, b];
+						}
+						getCondition: function(area, prefix = true)
+						{
+							var cond = "";
+
+							if (prefix)
+							{
+								cond = this.wordTypes.condition_prefix[this.getRandomNo(this.wordTypes.condition_prefix.length)];
+								return cond + " " + area;
+							} 
+							else 
+							{
+								cond = this.wordTypes.condition_suffix[this.getRandomNo(this.wordTypes.condition_suffix.length)];
+								return area + " " + cond;
+							}
+						},
+						getRandomNo: function(max)
+						{
+							return Math.floor(Math.random() * max);
+						},
+					},
+					created: function()
+					{
+						for (let i = 0; i < this.ctms.length; i++)
+						{
+							this.fillInfo(i);
+						}
+					}
+				}
+			);
+		</script>
+	</body>
+</html>

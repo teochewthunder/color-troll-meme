@@ -23,7 +23,7 @@
 			.ctm h1
 			{
 				margin-top: 50%;
-				font-size: 20px;
+				font-size: 30px;
 				text-align: center;
 			}
 		</style>
@@ -95,22 +95,13 @@
 								textColor: ""
 							}														
 						],
+						inUse:
+						[
+
+						],
 						wordTypes:
 						{	
 							area: 
-							[
-								"eye",
-								"lip",
-								"tailbone",
-								"fingers",
-								"liver",
-								"kidney",
-								"spleen",
-								"colon",
-								"knee",
-								"hip"
-							],
-							trollArea: 
 							[
 								"testicle",
 								"anus",
@@ -123,14 +114,30 @@
 								"cleavage",
 								"rectum"
 							],
+							condition:
+							[
+								"dehydration",
+								"constipation",
+								"arthritis",
+								"fungus",
+								"bronchitis",
+								"myopia",
+								"baldness",
+								"pinkeye",
+								"diarrhoea",
+								"narcolepsy",
+								"epilepsy",
+								"ostereoporosis",
+								"dementia",
+								"psychosis"
+							],
 							condition_prefix: 
 							[
 								"detached",
 								"bruised",
-								"dislocated",
-								"inflamed",
 								"inverted",
-								"ingrown"
+								"ingrown",
+								"misaligned"
 							],
 							condition_suffix: 
 							[
@@ -141,8 +148,10 @@
 								"blisters",
 								"blockage",
 								"fracture",
-								"dehydration",
-								"ulcers"
+								"ulcers",
+								"inflammation",
+								"necrosis",
+								"dislocation"
 							]
 						}
 					},
@@ -155,14 +164,21 @@
 								{
 									var isLast = (index === this.ctms.length - 1);
 
-									var prefix = (this.getRandomNo(2) === 0);
-									var area = (this.getOne(isLast ? this.wordTypes.trollArea : this.wordTypes.area));
-									ctm.name = this.getCondition(area, prefix);
-
+									if (isLast) 
+									{
+										var prefix = (this.getRandomNo(2) === 0);
+										var area = this.getOne(this.wordTypes.area);
+										ctm.name = this.getCondition(area, prefix);
+									} 
+									else
+									{
+										ctm.name = this.getOne(this.wordTypes.condition);
+									}
+									
 									var colorArr = this.getColor(155);
 									ctm.color = "rgb(" + colorArr[0] + "," + colorArr[1] + "," + colorArr[2] + ")";
 
-									var opacity = (isLast ? 0.1 : (this.getRandomNo(4) + 5) / 10);
+									var opacity = (isLast ? 0.05 : (this.getRandomNo(6) + 2) / 10);
 									ctm.textColor = "rgba(255, 255, 255, " + opacity + ")";
 								}
 							);														

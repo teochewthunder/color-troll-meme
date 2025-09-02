@@ -6,22 +6,25 @@
 		<style>
 			.ctmContainer
 			{
-				width: 500px;
+				width: 100%;
 				height: 200px;
 			}
 
 			.ctm
 			{
-				width: 200px;
-				height: 200px;
+				width: 300px;
+				height: 300px;
 				float: left;
+				margin-left: 10%;
+				margin-top: 10%;
 				border-radius: 50%;
 			}
 
 			.ctm h1
 			{
-				margin-top: 10%;
+				margin-top: 50%;
 				font-size: 20px;
+				text-align: center;
 			}
 		</style>
 	</head>
@@ -29,8 +32,8 @@
 	<body>
 		<div id="ctmApp">
 			<div class="ctmContainer">
-				<div class="ctm">
-					<h1></h1>
+				<div class="ctm" v-for="ctm in ctms" style="background-color:{{ ctm.color }}">
+					<h1 style="color:{{ ctm.textColor }}">{{ ctm.name }}</h1>
 				</div>
 			</div>
 		</div>
@@ -48,54 +51,62 @@
 						[
 							{
 								name: "",
-								color: [0, 0, 0]
+								color: "",
+								textColor: ""
 							},
 							{
 								name: "",
-								color: [0, 0, 0]
+								color: "",
+								textColor: ""
 							},
 							{
 								name: "",
-								color: [0, 0, 0]
+								color: "",
+								textColor: ""
 							},
 							{
 								name: "",
-								color: [0, 0, 0]
-							},							
-							{
-								name: "",
-								color: [0, 0, 0]
+								color: "",
+								textColor: ""
 							},
 							{
 								name: "",
-								color: [0, 0, 0]
+								color: "",
+								textColor: ""
 							},
 							{
 								name: "",
-								color: [0, 0, 0]
+								color: "",
+								textColor: ""
 							},
 							{
 								name: "",
-								color: [0, 0, 0]
+								color: "",
+								textColor: ""
 							},
 							{
 								name: "",
-								color: [0, 0, 0]
-							}
+								color: "",
+								textColor: ""
+							},
+							{
+								name: "",
+								color: "",
+								textColor: ""
+							}														
 						],
 						wordTypes:
 						{	
 							area: 
 							[
 								"eye",
-								"mouth",
+								"lip",
 								"tailbone",
-								"wrist",
+								"fingers",
 								"liver",
 								"kidney",
 								"spleen",
 								"colon",
-								"brain",
 								"knee",
 								"hip"
 							],
@@ -116,18 +127,22 @@
 							[
 								"detached",
 								"bruised",
-								"broken",
-								"inflamed"
+								"dislocated",
+								"inflamed",
+								"inverted",
+								"ingrown"
 							],
 							condition_suffix: 
 							[
-								"tear",
+								"lacerations",
 								"tumor",
 								"cancer",
-								"ulcer",
-								"blister",
-								"dislocation",
-								"fracture"
+								"ulcers",
+								"blisters",
+								"blockage",
+								"fracture",
+								"dehydration",
+								"ulcers"
 							]
 						}
 					},
@@ -135,41 +150,53 @@
 					{
 						fillInfo: function(ctmIndex)
 						{
-							var keys = Object.keys(this.wordTypes);
-
 							this.ctms.forEach(
-								(ctm) => 
+								(ctm, index) => 
 								{
+									var isLast = (index === this.ctms.length - 1);
 
+									var prefix = (this.getRandomNo(2) === 0);
+									var area = (this.getOne(isLast ? this.wordTypes.trollArea : this.wordTypes.area));
+									ctm.name = this.getCondition(area, prefix);
+
+									var colorArr = this.getColor(155);
+									ctm.color = "rgb(" + colorArr[0] + "," + colorArr[1] + "," + colorArr[2] + ")";
+
+									var opacity = (isLast ? 0.1 : (this.getRandomNo(4) + 5) / 10);
+									ctm.textColor = "rgba(255, 255, 255, " + opacity + ")";
 								}
 							);														
 						},
-						getColor: function()
+						getColor: function(maxRGB)
 						{
-							var r = this.getRandomNo(255);
-							var b = this.getRandomNo(255);
-							var g = this.getRandomNo(255);
+							var r = this.getRandomNo(maxRGB);
+							var b = this.getRandomNo(maxRGB);
+							var g = this.getRandomNo(maxRGB);
 							return [r, g, b];
-						}
+						},
 						getCondition: function(area, prefix = true)
 						{
 							var cond = "";
 
 							if (prefix)
 							{
-								cond = this.wordTypes.condition_prefix[this.getRandomNo(this.wordTypes.condition_prefix.length)];
+								cond = this.getOne(this.wordTypes.condition_prefix);
 								return cond + " " + area;
 							} 
 							else 
 							{
-								cond = this.wordTypes.condition_suffix[this.getRandomNo(this.wordTypes.condition_suffix.length)];
+								cond = this.getOne(this.wordTypes.condition_suffix);
 								return area + " " + cond;
 							}
 						},
-						getRandomNo: function(max)
+						getOne: function(arr)
+						{
+							return arr[this.getRandomNo(arr.length)];
+						},
+						getRandomNo:function(max)
 						{
 							return Math.floor(Math.random() * max);
-						},
+						}
 					},
 					created: function()
 					{

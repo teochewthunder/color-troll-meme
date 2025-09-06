@@ -22,7 +22,7 @@
 
 			.ctm h1
 			{
-				margin-top: 50%;
+				margin-top: 40%;
 				font-size: 30px;
 				text-align: center;
 			}
@@ -106,7 +106,6 @@
 								"testicle",
 								"anus",
 								"vagina",
-								"nostril",
 								"nipple",
 								"groin",
 								"penis",
@@ -119,17 +118,17 @@
 								"dehydration",
 								"constipation",
 								"arthritis",
-								"fungus",
 								"bronchitis",
 								"myopia",
 								"baldness",
 								"pinkeye",
-								"diarrhoea",
 								"narcolepsy",
 								"epilepsy",
 								"ostereoporosis",
 								"dementia",
-								"psychosis"
+								"psychosis",
+								"indigestion",
+								"heartburn"
 							],
 							condition_prefix: 
 							[
@@ -137,13 +136,13 @@
 								"bruised",
 								"inverted",
 								"ingrown",
-								"misaligned"
+								"misaligned",
+								"ruptured"
 							],
 							condition_suffix: 
 							[
 								"lacerations",
 								"tumor",
-								"cancer",
 								"ulcers",
 								"blisters",
 								"blockage",
@@ -151,7 +150,9 @@
 								"ulcers",
 								"inflammation",
 								"necrosis",
-								"dislocation"
+								"discharge",
+								"dysfunction",
+								"fungus"
 							]
 						}
 					},
@@ -173,13 +174,20 @@
 									else
 									{
 										ctm.name = this.getOne(this.wordTypes.condition);
+
+										while (this.inUse.indexOf(ctm.name) > -1)
+										{
+											ctm.name = this.getOne(this.wordTypes.condition);
+										}
+										
+										this.inUse.push(ctm.name);
 									}
 									
-									var colorArr = this.getColor(155);
+									var colorArr = this.getColor(100);
 									ctm.color = "rgb(" + colorArr[0] + "," + colorArr[1] + "," + colorArr[2] + ")";
 
-									var opacity = (isLast ? 0.05 : (this.getRandomNo(6) + 2) / 10);
-									ctm.textColor = "rgba(255, 255, 255, " + opacity + ")";
+									var opacity = (isLast ? 0.05 : (this.getRandomNo(8) + 2) / 10);
+									ctm.textColor = "rgba(" + (colorArr[0] + 150) + "," + (colorArr[1] + 150) + "," + (colorArr[2] + 150) + "," + opacity + ")";
 								}
 							);														
 						},
@@ -216,10 +224,7 @@
 					},
 					created: function()
 					{
-						for (let i = 0; i < this.ctms.length; i++)
-						{
-							this.fillInfo(i);
-						}
+						this.fillInfo();
 					}
 				}
 			);

@@ -4,12 +4,6 @@
 		<title>Color Troll Meme</title>
 
 		<style>
-			.ctmContainer
-			{
-				width: 100%;
-				height: 200px;
-			}
-
 			.ctm
 			{
 				width: 300px;
@@ -31,10 +25,8 @@
 
 	<body>
 		<div id="ctmApp">
-			<div class="ctmContainer">
-				<div class="ctm" v-for="ctm in ctms" style="background-color:{{ ctm.color }}">
-					<h1 style="color:{{ ctm.textColor }}">{{ ctm.name }}</h1>
-				</div>
+			<div class="ctm" v-for="ctm in ctms" style="background-color:{{ ctm.color }}">
+				<h1 style="color:{{ ctm.textColor }}">{{ ctm.name }}</h1>
 			</div>
 		</div>
 

@@ -12,6 +12,7 @@
 				margin-left: 10%;
 				margin-top: 10%;
 				border-radius: 50%;
+				background-color: rgb(10, 10, 10);
 			}
 
 			.ctm h1
@@ -19,6 +20,7 @@
 				margin-top: 40%;
 				font-size: 30px;
 				text-align: center;
+				color:  rgb(100, 100, 100);
 			}
 		</style>
 	</head>
@@ -116,7 +118,7 @@
 								"pinkeye",
 								"narcolepsy",
 								"epilepsy",
-								"ostereoporosis",
+								"insomnia",
 								"dementia",
 								"psychosis",
 								"indigestion",
@@ -150,7 +152,7 @@
 					},
 					methods:
 					{
-						fillInfo: function(ctmIndex)
+						fillInfo: function()
 						{
 							this.ctms.forEach(
 								(ctm, index) => 
@@ -179,6 +181,7 @@
 									ctm.color = "rgb(" + colorArr[0] + "," + colorArr[1] + "," + colorArr[2] + ")";
 
 									var opacity = (isLast ? 0.05 : (this.getRandomNo(8) + 2) / 10);
+
 									ctm.textColor = "rgba(" + (colorArr[0] + 150) + "," + (colorArr[1] + 150) + "," + (colorArr[2] + 150) + "," + opacity + ")";
 								}
 							);														

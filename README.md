@@ -40,3 +40,10 @@ Methods:
   - Declare `b` as a random integer between 0 and `max` - 1.
   - Return an array containing `r`, `g` and `b`.
 - `fillInfo()`: 
+  - For each element in ctms, fill in the `name`, `color` and `textColor` properties.
+    - `color` is derived from using `getColor()` with an argument of 100.
+    - `textColor` is derived by adding 150 to each value of `color`, and `opacity`.
+      - `opacity` is 0.05 if it is the last element, and randomly derived otherwise. (between 0.7 and 0.9)
+    - `name` is derived by:
+      - if last element, use `getOne()` on `condition` array.
+      - if not, `getOne()` on `area` array, then determine 0 or 1 from `getRandomNo()` and pass both results to `getCondition()`.

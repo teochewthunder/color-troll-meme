@@ -1,4 +1,4 @@
-# Color Troll Meme (TBC)
+# Color Troll Meme 
 VueJS setup for fun medical meme display
 
 HTML/CSS:
@@ -11,11 +11,11 @@ Data:
   - `name`: A string.
   - `color`: An array of 3 integers.
   - `textColor`: An array of 3 integers.
-- `wordTypes`
-  - `xx`:
-  - `xx`:
-  - `xx`:
-  - `xx`:
+- `wordTypes`:
+  - `area`: An array of strings.
+  - `condition`: An array of strings.
+  - `condition_prefix`: An array of strings, meant to be used with `area`.
+  - `condition_suffix`: An array of strings, meant to be used with `area`.
 - `inUse`:
 
 Methods:
